@@ -18,31 +18,34 @@ const App = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
+  
     // Data validation
     if (!username || !email || !dob || !phone) {
       alert("Please fill out all fields.");
       return;
     }
-
+  
     if (!email.includes("@")) {
       alert("Invalid email. Please check your email address.");
       return;
     }
-
-    if (phone.length !== 10 || isNaN(phone)) {
+  
+    const phoneRegex = /^\d{10}$/;
+    if (!phoneRegex.test(phone)) {
       alert("Invalid phone number. Please enter a 10-digit phone number.");
       return;
     }
-
+  
     const today = new Date();
+    const minDOB = new Date();
+    minDOB.setFullYear(today.getFullYear() - 18); // Minimum age required is 18 years
     const selectedDate = new Date(dob);
-
-    if (selectedDate > today) {
+  
+    if (selectedDate > today || selectedDate > minDOB) {
       alert("Invalid date of birth. Please enter a valid date.");
       return;
     }
-
+  
     // If all validations pass, close the modal and reset the form
     setIsOpen(false);
     setUsername("");
@@ -50,6 +53,7 @@ const App = () => {
     setDob("");
     setPhone("");
   };
+  
 
   return (
     <div>

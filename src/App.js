@@ -32,7 +32,7 @@ const App = () => {
   
     const phoneRegex = /^\d{10}$/;
     if (!phoneRegex.test(phone)) {
-      alert("Invalid phone number. Please enter a 10-digit phone number.");
+      alert("Invalid phone number");
       return;
     }
   
@@ -42,7 +42,7 @@ const App = () => {
     const selectedDate = new Date(dob);
   
     if (selectedDate > today || selectedDate > minDOB) {
-      alert("Invalid date of birth. Please enter a valid date.");
+      alert("Invalid date of birth");
       return;
     }
   
